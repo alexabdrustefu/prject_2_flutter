@@ -1,14 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 //creo la schermata principale
 class StartScreen extends StatelessWidget {
   //costruttore
-  const StartScreen({super.key});
+  const StartScreen(this.startQuiz, {super.key});
 
+  final void Function() startQuiz;
   @override
   Widget build(context) {
-    return const Center(
-      child: Text('Schermata principale'),
+    return Center(
+      child: Column(
+        //fix altezza del logo
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            'assets/images/quiz-logo.png',
+            width: 300,
+            //applico la trasparentezza dal colore
+            color: const Color.fromARGB(148, 237, 237, 237),
+            //  Opacity(
+            // opacity: 0.6, //faccio il set dell'opacitá
+            // child: Image.asset('assets/images/quiz-logo.png',
+            // width: 300
+            //),
+          ),
+          const SizedBox(height: 80),
+          const Text(
+            'Quiz flutter!',
+            style: TextStyle(color: Colors.white, fontSize: 24),
+          ),
+          const SizedBox(height: 30),
+          OutlinedButton.icon(
+              onPressed:startQuiz,
+              style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
+              icon: const Icon(Icons.arrow_right_alt),
+              label: const Text('Inizia il quiz'))
+        ],
+      ),
     );
   }
 }
