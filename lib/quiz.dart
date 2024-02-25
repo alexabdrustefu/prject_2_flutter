@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:prject_2/question_screen.dart';
 import 'package:prject_2/start_screen.dart';
 
@@ -16,12 +15,15 @@ class _QuizState extends State<Quiz> {
   Widget ?activeScreen;
   @override
   void initState(){
+    //richiamo la schermata start screen 
      activeScreen = StartScreen(switchScreen);
     super.initState();
   }
 
-  switchScreen() {
+
+  void switchScreen() {
     setState(() {
+      //metodo per cambiare la pagina
       activeScreen = const QuestionScreen();
     });
   }
