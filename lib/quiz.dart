@@ -4,6 +4,7 @@ import 'package:prject_2/start_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
+
   @override
   State<Quiz> createState() {
     return _QuizState();
@@ -11,27 +12,18 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  //memorizzo il widget
-  Widget ?activeScreen;
-  @override
-  void initState(){
-    //richiamo la schermata start screen 
-     activeScreen = StartScreen(switchScreen);
-    super.initState();
-  }
-
+  var activeScreen = 'start-screen';
 
   void switchScreen() {
     setState(() {
-      //metodo per cambiare la pagina
-      activeScreen = const QuestionScreen();
+      activeScreen = 'question-screen';
     });
   }
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
+    //var screenWidget = StartScreen(switchScreen);
     return MaterialApp(
-      //richiamo il widget creato
       home: Scaffold(
         body: Container(
           decoration: const BoxDecoration(
@@ -44,7 +36,10 @@ class _QuizState extends State<Quiz> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: activeScreen,
+          //espressione ternaria
+          child: activeScreen == 'start-screen'
+              ? StartScreen(switchScreen)
+              : const QuestionScreen(),
         ),
       ),
     );
