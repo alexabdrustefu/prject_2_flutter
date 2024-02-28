@@ -14,7 +14,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  //genero vvariabile per memorizzare le risposte date
+  //genero  variabile per memorizzare le risposte date
   List<String> selectedAnswer = [];
   var activeScreen = 'start-screen';
 
@@ -30,10 +30,17 @@ class _QuizState extends State<Quiz> {
       //schermata dei risultati finali
       setState(() {
         //una volta finite le domande pongo la lista ad elemento vuoto
-        selectedAnswer =[];
+        //selectedAnswer =[];
         activeScreen = 'result-screen';
       });
     }
+  }
+  //funzione per il restart del quiz
+    void restartQuiz() {
+    setState(() {
+      selectedAnswer = [];
+      activeScreen = 'questions-screen';
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -41,9 +48,9 @@ class _QuizState extends State<Quiz> {
     if(activeScreen == 'question-screen'){
      screenWidget= QuestionScreen(onSelectAnswer: chooseAnswer,);
     }
-
+  
     if(activeScreen == 'result-screen'){
-      screenWidget=const ResultScreen();
+      screenWidget= ResultScreen(chosenAnswer: selectedAnswer ,onRestart: restartQuiz);
     }
     return MaterialApp(
       home: Scaffold(
